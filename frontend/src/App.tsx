@@ -14,7 +14,7 @@ export default function App() {
     return (
         <>
             <div>
-                hello, everyone!!!
+                hello, everyone!
                 <br />
                 this is the home page
             </div>

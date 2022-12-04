@@ -1,5 +1,5 @@
 {
-    "name": "todo-app",
+    "name": "backend",
     "version": "1.0.0",
     "description": "A basic todo app made using the MERN Stack.",
     "main": "index.js",

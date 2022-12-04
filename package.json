@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "description": "A basic todo app made using the MERN Stack.",
     "scripts": {
-        "dev": "concurrently \"cd backend && npm run dev\"",
-        "build": "concurrently \"cd backend && npm run build\""
+        "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev-build\"",
+        "build": "concurrently \"cd backend && npm run build\" \"cd frontend && npm run build\""
     },
     "repository": {
         "type": "git",

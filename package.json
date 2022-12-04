@@ -1,0 +1,23 @@
+{
+    "name": "todo-app",
+    "version": "1.0.0",
+    "description": "A basic todo app made using the MERN Stack.",
+    "scripts": {
+        "dev": "concurrently \"cd backend && npm run dev\"",
+        "build": "concurrently \"cd backend && npm run build\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/The5thAxiom/todo-app.git"
+    },
+    "author": "The5thAxiom (Samridh Anand Paatni)",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/The5thAxiom/todo-app/issues"
+    },
+    "homepage": "https://github.com/The5thAxiom/todo-app#readme",
+    "devDependencies": {
+        "concurrently": "^7.6.0"
+    }
+}
+

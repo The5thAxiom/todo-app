@@ -33,7 +33,7 @@ const signup = async (req: Request, res: Response) => {
     const jwtSecretKey = process.env.JWT_SECRET_KEY as string;
 
     // validate the input
-    const { name, email, password }: userForDb = req.body;
+    const { name, email, password }: UserForDb = req.body;
     try {
         nameIsValid(name);
         emailIsValid(email);
@@ -48,7 +48,7 @@ const signup = async (req: Request, res: Response) => {
 
     // prepare the user
     const hashedPassword = await hash(password, 10);
-    const user: userForDb = {
+    const user: UserForDb = {
         name,
         email,
         password: hashedPassword

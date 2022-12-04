@@ -1,30 +1,37 @@
-type user = {
-    name: string;
-    email: string;
-};
+import { ObjectId } from 'mongodb';
+export {};
 
-//table
-type userForDb = user & {
-    password: string;
-};
+declare global {
+    type User = {
+        _id?: ObjectId;
+        name: string;
+        email: string;
+    };
 
-enum todoPriority {
-    high = 'high',
-    medium = 'medium',
-    low = 'low'
+    //table
+    type UserForDb = User & {
+        password: string;
+    };
+
+    enum TodoPriority {
+        high = 'high',
+        medium = 'medium',
+        low = 'low'
+    }
+
+    //table
+    type Todo = {
+        _id?: ObjectId;
+        creator: User;
+        creationDateTime: Date;
+        collaborators: User[];
+        tags: string[];
+
+        title: string;
+        description?: string;
+        priority?: TodoPriority;
+        hasDate?: boolean;
+        hasTime?: boolean;
+        dateTime?: Date;
+    };
 }
-
-//table
-type todo = {
-    creator: user;
-    creationDateTime: Date;
-    collaborators: user[];
-    tags: string[];
-
-    title: string;
-    description?: string;
-    priority?: todoPriority;
-    hasDate?: boolean;
-    hasTime?: boolean;
-    dateTime?: Date;
-};

@@ -15,7 +15,7 @@ const login = async (req: Request, res: Response) => {
         const db = client.db('todo');
         const users = db.collection('users');
 
-        // find the user with the given email and password
+        // find the user with the given email
         const user = await users.findOne({ email });
 
         if (user) {

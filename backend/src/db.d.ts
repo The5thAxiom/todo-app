@@ -1,7 +1,4 @@
-type userId = string;
-
 type user = {
-    id: userId;
     name: string;
     email: string;
 };
@@ -11,26 +8,18 @@ type userForDb = user & {
     password: string;
 };
 
-type todoId = string;
-
 enum todoPriority {
     high = 'high',
     medium = 'medium',
     low = 'low'
 }
 
-type tag = {
-    id: string;
-    name: string;
-};
-
 //table
 type todo = {
-    id: todoId;
-    creatorId: userId;
+    creator: user;
     creationDateTime: Date;
     collaborators: user[];
-    tags: tag[];
+    tags: string[];
 
     title: string;
     description?: string;

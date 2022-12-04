@@ -1,47 +1,53 @@
-import express from 'express';
+import express, { json } from 'express';
 import { config } from 'dotenv';
 
-config();
+import validJwtRequired from './middleware/validJwtRequired.js';
 
+import login from './endpoints/login.js';
+import signup from './endpoints/signup.js';
+
+config();
 const app = express();
 const port = process.env.PORT;
 
-import protectedEndpoint from './protectedEndpoint.js';
-
 app.use('/', express.static('../frontend/dist'));
+app.use(json());
 
 app.get('/api', (req, res) => {
     res.send('welcome to the todo app api!');
 });
 
-app.get('/api/test', (req, res) => {
-    res.json({ msg: 'the server is running' });
+app.get('/api/test', (req, res) => res.json({ msg: 'running' }));
+
+// user endpoints
+app.post('/api/signup', signup);
+
+app.post('/api/login', login);
+
+app.get('/api/profile', validJwtRequired, (req, res) => {
+    const msg = 'user details';
+    const user = res.locals.user as User;
+    res.json({ msg, user });
 });
 
-app.get('/api/signup', (req, res) => {});
+app.get('/api/logout', validJwtRequired, (req, res) => {
+    const msg = 'logged out';
+    const user = res.locals.user as User;
+    res.json({ msg });
+});
 
-app.get('/api/login', (req, res) => {});
+// todo endpoints
+app.get('/api/todos', validJwtRequired, (req, res) => {
+    const msg = 'OK';
+    const user = res.locals.user as User;
+    res.json({ msg, user });
+});
 
-app.get(
-    '/api/profile',
-    protectedEndpoint((req, res, user) => {
-        res.json({ user });
-    })
-);
-
-app.get(
-    '/api/todos',
-    protectedEndpoint((req, res, user) => {
-        res.json({ user });
-    })
-);
-app.get(
-    '/api/todo/:id',
-    protectedEndpoint((req, res, user) => {
-        const id = req.params.id;
-        res.json({ id, user });
-    })
-);
+app.get('/api/todo/:id', validJwtRequired, (req, res) => {
+    const msg = 'OK';
+    const user = res.locals.user as User;
+    res.json({ msg, user });
+});
 
 app.listen(port, () => {
     console.log(`[server]: live at http://localhost:${port}`);

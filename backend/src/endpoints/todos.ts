@@ -26,7 +26,8 @@ export const getAllTodos = async (req: Request, res: Response) => {
 };
 
 export const addNewTodo = async (req: Request, res: Response) => {
-    const user = res.locals.user as User;
+    const user = res.locals.user;
+    delete user.password;
 
     // get the todo from the request
     const todoFromRequest = req.body;
@@ -65,6 +66,4 @@ export const addNewTodo = async (req: Request, res: Response) => {
     } finally {
         client.close();
     }
-
-    res.json({ msg: 'OK' });
 };

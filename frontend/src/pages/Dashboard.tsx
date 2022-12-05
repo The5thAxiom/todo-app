@@ -31,9 +31,9 @@ function Dashboard() {
         title: string;
         description?: string;
         priority?: 'high' | 'medium' | 'low';
-        hasDate?: boolean;
-        hasTime?: boolean;
-        dateTime?: Date;
+        hasDate?: boolean; // later
+        hasTime?: boolean; // later
+        dateTime?: Date; // later
     };
 
     const emptyTodo: NewTodoData = {

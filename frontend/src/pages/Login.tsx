@@ -1,6 +1,6 @@
 import { useState, FormEventHandler, ChangeEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useApi from '../hooks/useFetch';
+import useApi from '../hooks/useApi';
 
 function Login() {
     type LoginFormData = {

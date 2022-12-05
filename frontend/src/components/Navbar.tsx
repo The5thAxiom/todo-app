@@ -1,4 +1,6 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import useToken from '../hooks/useToken';
+import useUser from '../hooks/useUser';
 
 const navLinks: {
     href: string;
@@ -12,6 +14,18 @@ const navLinks: {
 ];
 
 function Navbar() {
+    const { removeToken } = useToken();
+    const { unsetUser } = useUser();
+    const navigate = useNavigate();
+
+    const logout = () => {
+        if (confirm('Logging you out')) {
+            removeToken();
+            unsetUser();
+            navigate('/login');
+        }
+    };
+
     return (
         <nav>
             {navLinks.map(({ href, name }) => (
@@ -19,6 +33,9 @@ function Navbar() {
                     {name}
                 </NavLink>
             ))}
+            <span onClick={logout} className='underline'>
+                Logout
+            </span>
         </nav>
     );
 }

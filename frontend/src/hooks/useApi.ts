@@ -6,12 +6,15 @@ type ApiResponse = {
 };
 
 const useApi = () => {
-    const setToken = useToken(state => state.setToken);
+    const { token, setToken } = useToken();
     const call = async <T>(endpoint: string, method: Method, data?: any) => {
         const response = await axios({
             method,
             url: endpoint,
-            data
+            data,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         });
         if (response.data.token) {
             const newToken = response.data.token;

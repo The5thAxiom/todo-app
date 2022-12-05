@@ -19,10 +19,7 @@ function LoggedInUser({ children }: { children: ReactElement }) {
             if (!token) {
                 navigate('/login');
             } else if (!user) {
-                const { data } = await apiCall<{ user: User }>(
-                    '/api/profile',
-                    'GET'
-                );
+                const { data } = await apiCall<{ user: User }>('/api/profile');
                 setUser(data.user);
             }
         };

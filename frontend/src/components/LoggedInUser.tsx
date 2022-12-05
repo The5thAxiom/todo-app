@@ -1,25 +1,25 @@
 import { useEffect, ReactElement } from 'react';
 
-import Loading from './components/Loading';
+import Loading from './Loading';
 
-import useUser from './hooks/useUser';
-import useApi from './hooks/useApi';
-import useToken from './hooks/useToken';
+import useUser from '../hooks/useUser';
+import useApi from '../hooks/useApi';
+import useToken from '../hooks/useToken';
 import { useNavigate } from 'react-router-dom';
 
-function ValidJwtRequired({ children }: { children: ReactElement }) {
+function LoggedInUser({ children }: { children: ReactElement }) {
     const navigate = useNavigate();
 
     const { user, setUser } = useUser();
     const { token } = useToken();
-    const { call } = useApi();
+    const apiCall = useApi();
 
     useEffect(() => {
         const fetchUser = async () => {
             if (!token) {
                 navigate('/login');
             } else if (!user) {
-                const { data } = await call<{ user: User }>(
+                const { data } = await apiCall<{ user: User }>(
                     '/api/profile',
                     'GET'
                 );
@@ -32,4 +32,4 @@ function ValidJwtRequired({ children }: { children: ReactElement }) {
     return <>{user ? children : <Loading />}</>;
 }
 
-export default ValidJwtRequired;
+export default LoggedInUser;

@@ -7,7 +7,7 @@ type ApiResponse = {
 
 const useApi = () => {
     const { token, setToken } = useToken();
-    const call = async <T>(endpoint: string, method: Method, data?: any) => {
+    const apiCall = async <T>(endpoint: string, method: Method, data?: any) => {
         const response = await axios({
             method,
             url: endpoint,
@@ -23,7 +23,7 @@ const useApi = () => {
         }
         return { ...response, data: response.data as ApiResponse & T };
     };
-    return { call };
+    return apiCall;
 };
 
 export default useApi;

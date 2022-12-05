@@ -11,7 +11,7 @@ function Login() {
         email: '',
         password: ''
     });
-    const { call } = useApi();
+    const apiCall = useApi();
     const navigate = useNavigate();
 
     const inputChangeHandler: ChangeEventHandler<HTMLInputElement> = e => {
@@ -25,7 +25,7 @@ function Login() {
         const {
             data: { msg },
             status
-        } = await call('/api/login', 'POST', formData);
+        } = await apiCall('/api/login', 'POST', formData);
         console.log(msg);
         console.log(status);
         if (status === 202) {

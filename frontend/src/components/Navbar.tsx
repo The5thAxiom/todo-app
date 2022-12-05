@@ -15,7 +15,7 @@ function Navbar() {
     return (
         <nav>
             {navLinks.map(({ href, name }) => (
-                <NavLink className='underline' to={href}>
+                <NavLink key={name} className='underline' to={href}>
                     {name}
                 </NavLink>
             ))}

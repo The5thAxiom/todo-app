@@ -41,7 +41,7 @@ const signup = async (req: Request, res: Response) => {
     } catch (e) {
         if (e instanceof ValidationError) {
             console.log(e.message);
-            res.status(400).json({ msg: e.message });
+            res.json({ msg: e.message });
             return;
         } else throw e;
     }
@@ -68,7 +68,7 @@ const signup = async (req: Request, res: Response) => {
             res.status(201).json({ msg: 'new account created' });
         } catch (e) {
             if (e instanceof MongoServerError && e.code === 11000) {
-                res.status(409).json({
+                res.json({
                     msg: 'an account with this email already exists'
                 });
             } else throw e;

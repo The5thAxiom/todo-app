@@ -25,13 +25,13 @@ const login = async (req: Request, res: Response) => {
                 const token = jwt.sign({ email }, jwtSecretKey, {
                     expiresIn: '30m'
                 });
-                res.status(200).json({
+                res.status(202).json({
                     msg: 'logged in successfully',
                     token
                 });
-            } else res.status(401).json({ msg: 'incorrect password' });
+            } else res.json({ msg: 'incorrect password' });
         } else {
-            res.status(400).json({ msg: 'incorrect email' });
+            res.json({ msg: 'incorrect email' });
         }
     } catch (e) {
         res.status(500).json({ msg: 'database error' });

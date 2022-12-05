@@ -28,7 +28,7 @@ function Login() {
         } = await call('/api/login', 'POST', formData);
         console.log(msg);
         console.log(status);
-        if (status === 200) {
+        if (status === 202) {
             navigate('/profile');
         } else {
             alert(msg);

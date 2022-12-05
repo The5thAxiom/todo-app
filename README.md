@@ -2,6 +2,13 @@
 
 A basic todo app made using the MERN Stack.
 
+# API
+
+-   `/api/login`:
+    -   `202`: logged in successfully
+    -   `200`: incorrect email or password
+    -   `500`: server error
+
 # Development environment
 
 ## `npm`

@@ -8,6 +8,10 @@ A basic todo app made using the MERN Stack.
     -   `202`: logged in successfully
     -   `200`: incorrect email or password
     -   `500`: server error
+-   `/api/signup`:
+    -   `201`: account created successfully
+    -   `200`: invalid inputs
+    -   `500`: server error
 
 # Development environment
 

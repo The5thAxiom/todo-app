@@ -15,4 +15,19 @@ declare global {
         contents: string;
         type: TodoNotificationType;
     };
+
+    type Todo = {
+        _id?: string;
+        creator: User;
+        creationDateTime: Date;
+        collaborators: User[];
+        tags: string[];
+
+        title: string;
+        description?: string;
+        priority?: 'high' | 'medium' | 'low';
+        hasDate?: boolean;
+        hasTime?: boolean;
+        dateTime?: Date;
+    };
 }

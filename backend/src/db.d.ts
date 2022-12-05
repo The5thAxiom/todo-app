@@ -13,12 +13,6 @@ declare global {
         password: string;
     };
 
-    enum TodoPriority {
-        high = 'high',
-        medium = 'medium',
-        low = 'low'
-    }
-
     //table
     type Todo = {
         _id?: ObjectId;
@@ -29,7 +23,7 @@ declare global {
 
         title: string;
         description?: string;
-        priority?: TodoPriority;
+        priority?: 'high' | 'medium' | 'low';
         hasDate?: boolean;
         hasTime?: boolean;
         dateTime?: Date;

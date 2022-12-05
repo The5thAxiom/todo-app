@@ -5,6 +5,7 @@ import validJwtRequired from './middleware/validJwtRequired.js';
 
 import login from './endpoints/login.js';
 import signup from './endpoints/signup.js';
+import { getAllTodos, addNewTodo } from './endpoints/todos.js';
 
 config();
 const app = express();
@@ -37,11 +38,9 @@ app.get('/api/logout', validJwtRequired, (req, res) => {
 });
 
 // todo endpoints
-app.get('/api/todos', validJwtRequired, (req, res) => {
-    const msg = 'OK';
-    const user = res.locals.user as User;
-    res.json({ msg, user });
-});
+app.get('/api/todos', validJwtRequired, getAllTodos);
+
+app.post('/api/todos', validJwtRequired, addNewTodo);
 
 app.get('/api/todo/:id', validJwtRequired, (req, res) => {
     const msg = 'OK';

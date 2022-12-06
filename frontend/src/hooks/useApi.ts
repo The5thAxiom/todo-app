@@ -1,12 +1,14 @@
-import axios, { Method } from 'axios';
+import axios, { AxiosError, Method } from 'axios';
 import useToken from './useToken';
+import useUser from './useUser';
 
 type ApiResponse = {
     msg: string;
 };
 
 const useApi = () => {
-    const { token, setToken } = useToken();
+    const { token, setToken, unsetToken } = useToken();
+    const { unsetUser } = useUser();
     const apiCall = async <T>(
         endpoint: string,
         method: Method = 'GET',
@@ -18,9 +20,13 @@ const useApi = () => {
             data,
             headers: {
                 Authorization: `Bearer ${token}`
-            }
+            },
+            validateStatus: status => status !== 404 || status < 500
         });
-        if (response.data.token) {
+        if (response.status === 401) {
+            unsetToken();
+            unsetUser();
+        } else if (response.data.token) {
             const newToken = response.data.token;
             setToken(newToken);
             delete response.data.token;

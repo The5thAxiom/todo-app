@@ -30,7 +30,6 @@ const passwordIsValid = (password: string) => {
 
 const signup = async (req: Request, res: Response) => {
     const dbUrl = process.env.DB_URL as string;
-    const jwtSecretKey = process.env.JWT_SECRET_KEY as string;
 
     // validate the input
     const { name, email, password }: UserForDb = req.body;
@@ -40,7 +39,6 @@ const signup = async (req: Request, res: Response) => {
         passwordIsValid(password);
     } catch (e) {
         if (e instanceof ValidationError) {
-            console.log(e.message);
             res.json({ msg: e.message });
             return;
         } else throw e;

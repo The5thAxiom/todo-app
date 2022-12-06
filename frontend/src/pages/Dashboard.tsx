@@ -16,7 +16,6 @@ function Dashboard() {
         const {
             data: { msg, todos }
         } = await apiCall<{ todos: Todo[] }>('/api/todos');
-        console.log({ msg, todos });
         setTodos(todos);
     }, []);
 

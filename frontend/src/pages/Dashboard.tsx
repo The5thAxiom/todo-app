@@ -6,14 +6,14 @@ import Todos from '../components/Todos';
 import useApi from '../hooks/useApi';
 
 function Dashboard() {
-    const [todos, setTodos] = useState<Todo[]>(null as any);
+    const [todos, setTodos] = useState<Todo[] | null>(null);
     const apiCall = useApi();
 
     const fetchTodos = useCallback(async () => {
         const {
             data: { todos }
-        } = await apiCall<{ todos: Todo[] }>('/api/todos');
-        setTodos(todos);
+        } = await apiCall<{ todos: Todo[] | null }>('/api/todos');
+        if (todos) setTodos(todos);
     }, []);
 
     useEffect(() => {

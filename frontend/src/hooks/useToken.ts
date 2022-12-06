@@ -2,17 +2,17 @@ import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
 type UseToken = {
-    token: string;
+    token: string | null;
     setToken: (token: string) => void;
     unsetToken: () => void;
 };
 
 const useToken = create(
     persist<UseToken>(
-        (set, get) => ({
-            token: null as any,
+        set => ({
+            token: null,
             setToken: (token: string) => set({ token }),
-            unsetToken: () => set({ token: null as any })
+            unsetToken: () => set({ token: null })
         }),
         {
             name: 'token-storage',

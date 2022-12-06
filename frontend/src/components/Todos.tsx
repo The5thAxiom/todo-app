@@ -1,6 +1,6 @@
 import Loading from './Loading';
 
-function Todos({ todos }: { todos: Todo[] }) {
+function Todos({ todos }: { todos: Todo[] | null }) {
     return (
         <ul>
             {todos ? (

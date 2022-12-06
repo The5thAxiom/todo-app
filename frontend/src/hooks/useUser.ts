@@ -2,7 +2,7 @@ import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
 type UserStore = {
-    user: User;
+    user: User | null;
     setUser: (user: User) => void;
     unsetUser: () => void;
 };
@@ -10,9 +10,9 @@ type UserStore = {
 const useUser = create(
     persist<UserStore>(
         set => ({
-            user: null as any,
+            user: null,
             setUser: (user: User) => set({ user }),
-            unsetUser: () => set({ user: null as any })
+            unsetUser: () => set({ user: null })
         }),
         {
             name: 'user-store',

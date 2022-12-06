@@ -1,4 +1,4 @@
-import axios, { AxiosError, Method } from 'axios';
+import axios, { Method } from 'axios';
 import useToken from './useToken';
 import useUser from './useUser';
 

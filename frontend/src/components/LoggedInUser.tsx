@@ -22,7 +22,9 @@ function LoggedInUser({ children }: { children: ReactElement }) {
                 const { data, status } = await apiCall<{ user: User }>(
                     '/api/profile'
                 );
-                if (status !== 401) setUser(data.user);
+                if (status !== 401) {
+                    setUser(data.user);
+                } else navigate('/login');
             }
         };
         fetchUser();

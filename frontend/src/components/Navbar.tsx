@@ -14,15 +14,13 @@ const navLinks: {
 ];
 
 function Navbar() {
-    const { removeToken } = useToken();
+    const { unsetToken } = useToken();
     const { unsetUser } = useUser();
-    const navigate = useNavigate();
 
     const logout = () => {
         if (confirm('Logging you out')) {
-            removeToken();
+            unsetToken();
             unsetUser();
-            navigate('/login');
         }
     };
 

@@ -23,7 +23,7 @@ const login = async (req: Request, res: Response) => {
             if (passwordIsValid) {
                 // create a new jwt token for the user
                 const token = jwt.sign({ email }, jwtSecretKey, {
-                    expiresIn: '30m'
+                    expiresIn: process.env.TOKEN_EXPIRY as string
                 });
                 res.status(202).json({
                     msg: 'logged in successfully',

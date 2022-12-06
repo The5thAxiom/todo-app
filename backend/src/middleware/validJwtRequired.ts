@@ -11,7 +11,7 @@ const validJwtRequired = async (
         const jwtSecretKey = process.env.JWT_SECRET_KEY as string;
         const token = req.headers.authorization?.split(' ')[1]; // get the part after 'Bearer'
         if (!token) throw Error('token not found');
-        const { email, exp } = jwt.verify(token, jwtSecretKey, {
+        const { email } = jwt.verify(token, jwtSecretKey, {
             complete: false
         }) as any;
 

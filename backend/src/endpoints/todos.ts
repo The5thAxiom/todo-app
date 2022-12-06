@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { MongoClient, MongoServerError } from 'mongodb';
 
 export const getAllTodos = async (req: Request, res: Response) => {
-    const msg = 'OK';
     const user = res.locals.user as User;
 
     const dbUrl = process.env.DB_URL as string;
@@ -17,7 +16,7 @@ export const getAllTodos = async (req: Request, res: Response) => {
         const todos = await todosCollection
             .find({ 'creator._id': user._id })
             .toArray();
-        res.json({ msg, todos });
+        res.json({ msg: 'OK', todos });
     } catch (e) {
         res.status(500).json({ msg: 'database error' });
     } finally {
@@ -50,17 +49,8 @@ export const addNewTodo = async (req: Request, res: Response) => {
         const todos = db.collection('todos');
 
         // insert the todo into the db
-        try {
-            const writeResult = await todos.insertOne(todo);
-            // check for errors
-            res.status(201).json({ msg: 'todo added' });
-        } catch (e) {
-            if (e instanceof MongoServerError && e.code === 11000) {
-                res.json({
-                    msg: 'an account with this email already exists'
-                });
-            } else throw e;
-        }
+        const writeResult = await todos.insertOne(todo);
+        res.status(201).json({ msg: 'todo added' });
     } catch (e) {
         res.status(500).json({ msg: 'database error' });
     } finally {
